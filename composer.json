@@ -1,0 +1,34 @@
+{
+	"name": "phpcraftdream/psr4utoload",
+	"license": "MIT",
+	"type": "library",
+	"version": "1.0.0-dev",
+	"extra":
+	{
+		"branch-alias":
+		{
+			"dev-master": "1.0.x-dev"
+		}
+	},
+	"autoload":
+	{
+		"psr-4":
+		{
+			"PHPCraftdream\\PSR4Autoload\\": "src/"
+		}
+	},
+	"authors":
+	[
+		{
+			"name": "PHPCraftDream"
+		}
+	],
+	"require-dev":
+	{
+
+	},
+	"require":
+	{
+
+	}
+}
