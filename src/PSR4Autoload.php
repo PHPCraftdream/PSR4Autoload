@@ -29,24 +29,34 @@
 
 		public function loadClass($class)
 		{
-			$ds = DIRECTORY_SEPARATOR;
-
 			foreach ($this->paths as $namespace => $path)
 			{
-				$len = strlen($namespace);
-
-				if (substr($class, 0, $len) !== $namespace) continue;
-
-				$className = substr($class, 1 + $len);
-				$className = str_replace(['/', '\\'], $ds, $className);
-
-				$path = $path . $className . '.php';
-
-				if (!is_file($path)) continue;
-
-				require_once $path;
+				$found = $this->loadClassByNsAndPath($class, $namespace, $path);
+				if (!$found) continue;
 
 				return;
 			}
+		}
+
+		public function loadClassByNsAndPath($class, $namespace, $path)
+		{
+			$ds = DIRECTORY_SEPARATOR;
+
+			$len = strlen($namespace);
+
+			if (substr($class, 0, $len) !== $namespace)
+				return false;
+
+			$className = substr($class, 1 + $len);
+			$className = str_replace(['/', '\\'], $ds, $className);
+
+			$path = $path . $className . '.php';
+
+			if (!is_file($path))
+				return false;
+
+			require_once $path;
+
+			return true;
 		}
 	}
